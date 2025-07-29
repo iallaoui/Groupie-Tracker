@@ -1,0 +1,57 @@
+<head>
+   <link rel="stylesheet" href="/templates/styles.css" />
+<script src="/templates/script.js"></script>
+
+</head>
+
+<body>
+
+    <h1>Groupie-Tracker</h1>
+    
+    <div class="name-group">
+        <a href="https://github.com/0abdelilah" class="names" style="text-decoration: none;">Abelkhadir</a>
+        —
+        <a href="https://github.com/iallaoui" class="names" style="text-decoration: none;">Iallaoui</a>
+    </div>
+
+    <div class="section">
+        <h2>Discover</h2>
+
+        <div class="container">
+            {{range $i, $artist := .Artists}}
+            <div class="artist">
+                <div>
+                    <img src="{{$artist.Image}}" alt="{{$artist.Name}}">
+                </div>
+                <div>
+                    <p style="font-size:medium; color: #f8f8f2; font-weight: bold;">{{$artist.Name}}</p>
+                    <p>Creation Date: {{$artist.CreationDate}}</p>
+                    <p>First Album: {{$artist.FirstAlbum}}</p>
+
+                    <button onclick="showDialog('LocationsDialog{{$i}}'); displayLocations('{{$i}}')">Locations</button>
+                    <dialog id="LocationsDialog{{$i}}">
+                        <p id="LocationsPlace{{$i}}">Loading...</p>
+                        <button onclick="closeDialog('LocationsDialog{{$i}}')">Close</button>
+                    </dialog>
+
+                    <button onclick="showDialog('MembersDialog{{$i}}')">Members</button>
+                    <dialog id="MembersDialog{{$i}}">
+                        <p>Members: {{$artist.Members}}</p>
+                        <button onclick="closeDialog('MembersDialog{{$i}}')">Close</button>
+                    </dialog>
+
+                    <button onclick="showDialog('MoreDialog{{$i}}'); displayMore('{{$i}}');">More info</button>
+                    <dialog id="MoreDialog{{$i}}">
+                        <p style="color: #50fa7b; font-size: 18px; font-weight: bold;">Relations:</p>
+                        <p id="RelationPlace{{$i}}">Loading...</p>
+                        <p style="color: #50fa7b; font-size: 18px; font-weight: bold;">Concert dates:</p>
+                        <p id="DatesPlace{{$i}}">Loading...</p>
+                        <button onclick="closeDialog('MoreDialog{{$i}}')">Close</button>
+                    </dialog>
+                </div>
+            </div>
+            {{end}}
+        </div>
+        <h2></h2>
+    </div>
+</body>
